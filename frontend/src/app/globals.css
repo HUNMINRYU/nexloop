@@ -1,0 +1,129 @@
+@import "tailwindcss";
+
+/* ========== Soft UI / Subtle Depth (B2B 권장) ========== */
+@theme {
+  /* Background & Surface */
+  --color-background: #f8fafc;
+  --color-surface: #ffffff;
+  --color-foreground: #0f172a;
+  --color-muted: #64748b;
+  --color-border: #e2e8f0;
+  /* Primary (브랜드 1종) */
+  --color-primary: #0ca678;
+  --color-primary-foreground: #ffffff;
+  --color-navy: #0f172a;
+  --color-accent: #6366f1;
+  --color-teal-light: #f0fdfa;
+  --color-navy-light: #f1f5f9;
+  --color-accent-light: #eef2ff;
+  --gradient-brand: linear-gradient(135deg, #0ca678, #6366f1);
+  /* Secondary / Muted UI */
+  --color-secondary: #f4f4f5;
+  --color-secondary-foreground: #18181b;
+  /* State (톤다운) */
+  --color-destructive: #dc2626;
+  --color-success: #16a34a;
+  --color-warning: #ca8a04;
+  --color-info: #2563eb;
+  /* Ring (focus) */
+  --color-ring: #0d9488;
+  /* Radius */
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+  --radius-xl: 24px;
+  /* Shadow (soft, no hard offset) */
+  --shadow-soft-sm: 0 1px 3px 0 rgba(0, 0, 0, 0.02);
+  --shadow-soft-md: 0 10px 25px -5px rgba(0, 0, 0, 0.04), 0 8px 10px -6px rgba(0, 0, 0, 0.04);
+  --shadow-soft-lg: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+}
+
+/* ========== Legacy Neobrutal (호환용, 점진적 제거) ========== */
+@theme {
+  --color-neo-cyan: #3cf0f0;
+  --color-neo-pink: #fda6e9;
+  --color-neo-yellow: #ecf78c;
+  --color-neo-blue: #6d97f3;
+  --color-neo-green: #a3ffa4;
+  --color-neo-purple: #9747ff;
+  --shadow-neo: 4px 4px 0px 0px rgba(0, 0, 0, 1);
+  --shadow-neo-lg: 8px 8px 0px 0px rgba(0, 0, 0, 1);
+  --border-neo: 2px solid black;
+  --border-neo-thick: 4px solid black;
+}
+
+:root {
+  --background: var(--color-background);
+  --foreground: var(--color-foreground);
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: "DM Sans", sans-serif;
+}
+
+/* ========== Soft UI Components (신규, 권장) ========== */
+@layer components {
+  .soft-card {
+    @apply bg-[var(--color-surface)] rounded-[var(--radius-lg)] shadow-[var(--shadow-soft-md)] border border-[var(--color-border)];
+  }
+  .soft-button {
+    @apply inline-flex items-center justify-center rounded-[var(--radius-md)] px-4 py-2 text-sm font-semibold transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-ring)] focus-visible:ring-offset-2;
+  }
+  .soft-button-primary {
+    @apply inline-flex items-center justify-center rounded-[var(--radius-md)] px-4 py-2 text-sm font-semibold transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-ring)] focus-visible:ring-offset-2 bg-[var(--color-primary)] text-[var(--color-primary-foreground)] shadow-[var(--shadow-soft-sm)] hover:opacity-90 active:opacity-95;
+  }
+  .soft-button-secondary {
+    @apply inline-flex items-center justify-center rounded-[var(--radius-md)] px-4 py-2 text-sm font-semibold transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-ring)] focus-visible:ring-offset-2 bg-[var(--color-secondary)] text-[var(--color-secondary-foreground)] border border-[var(--color-border)] hover:bg-[var(--color-border)];
+  }
+  .soft-input {
+    @apply w-full rounded-[var(--radius-md)] border border-[var(--color-border)] bg-[var(--color-surface)] px-3 py-2 text-[var(--color-foreground)] placeholder:text-[var(--color-muted)] focus:outline-none focus:ring-2 focus:ring-[var(--color-ring)] focus:ring-offset-0;
+  }
+  .soft-label {
+    @apply text-sm font-medium text-[var(--color-foreground)];
+  }
+  .soft-section {
+    @apply bg-[var(--color-surface)] rounded-[var(--radius-lg)] shadow-[var(--shadow-soft-md)] border border-[var(--color-border)] p-6;
+  }
+}
+
+/* ========== Legacy Neobrutalism (점진적 제거용) ========== */
+@layer components {
+  .neo-box {
+    @apply border border-[var(--color-border)] rounded-[var(--radius-lg)] shadow-[var(--shadow-soft-sm)] bg-white;
+  }
+  .neo-button {
+    @apply inline-flex items-center justify-center rounded-[var(--radius-md)] border border-[var(--color-border)] bg-white px-4 py-2 font-semibold shadow-[var(--shadow-soft-sm)] transition-all hover:shadow-[var(--shadow-soft-md)] active:shadow-none;
+  }
+  .neo-card {
+    @apply rounded-[var(--radius-lg)] border border-[var(--color-border)] bg-white p-6 shadow-[var(--shadow-soft-md)] transition-shadow hover:shadow-[var(--shadow-soft-lg)];
+  }
+  .bg-grid {
+    background-image: radial-gradient(circle, #000 1px, transparent 1px);
+    background-size: 30px 30px;
+    opacity: 0.05;
+  }
+}
+
+/* ========== Global Animations ========== */
+@keyframes marquee {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+.animate-marquee {
+  display: inline-flex;
+  animation: marquee 40s linear infinite;
+}
+
+@keyframes gradient-x {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+.animate-gradient-x {
+  background-size: 200% 200%;
+  animation: gradient-x 15s ease infinite;
+}
